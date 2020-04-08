@@ -31,23 +31,19 @@ let totalUsers = null
 
 async function getNextActivity () {
   currentActivity++
-  if (currentActivity === 2 && totalUsers == null) currentActivity++
+  if (currentActivity === 1 && totalUsers == null) currentActivity++
 
-  if (currentActivity > 3) {
+  if (currentActivity > 1) {
     currentActivity = 0
   }
 
   switch (currentActivity) {
-    case 0:
-      return { text: 'https://RoVer.link' }
-    case 1: {
+    case 0: {
       let totalGuilds = (await shardingManager.fetchClientValues('guilds.size')).reduce((prev, val) => prev + val, 0)
       totalGuilds = Util.toHumanReadableNumber(totalGuilds)
       return { text: `${totalGuilds} servers`, type: 'WATCHING' }
-    } case 2:
+    } case 1:
       return { text: `${totalUsers} users`, type: 'LISTENING' }
-    case 3:
-      return { text: '!rover', type: 'LISTENING' }
   }
 }
 
