@@ -26,25 +26,22 @@ shardingManager.spawn(config.totalShards || 'auto', 1000, 30000)
 global.GlobalCache = new GlobalCache(shardingManager)
 
 // Set bot status messages
-let currentActivity = 0
+// let currentActivity = 0
 let totalUsers = null
 
-async function getNextActivity () {
-  currentActivity++
-  if (currentActivity === 1 && totalUsers == null) currentActivity++
+function getNextActivity () {
+  // currentActivity++
+  // if (currentActivity === 1 && totalUsers == null) currentActivity++
+  //
+  // if (currentActivity > 0) {
+  //   currentActivity = 0
+  // }
 
-  if (currentActivity > 1) {
-    currentActivity = 0
-  }
-
-  switch (currentActivity) {
-    case 0: {
-      let totalGuilds = (await shardingManager.fetchClientValues('guilds.size')).reduce((prev, val) => prev + val, 0)
-      totalGuilds = Util.toHumanReadableNumber(totalGuilds)
-      return { text: `${totalGuilds} servers`, type: 'WATCHING' }
-    } case 1:
-      return { text: `${totalUsers} users`, type: 'LISTENING' }
-  }
+  // switch (currentActivity) {
+  //   case 0: {
+  return { text: `${totalUsers} users`, type: 'LISTENING' }
+  //   }
+  // }
 }
 
 request('https://verify.eryn.io/api/count')
